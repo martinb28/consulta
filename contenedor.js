@@ -6,12 +6,18 @@ class Contenedor {
     }
     
     async getAll() {
-        try{
-            const products = await fs.readFile(this.ruta, 'utf-8');            
+        try{            
+            const products = await fs.readFile(this.ruta, 'utf-8');                  
             return JSON.parse(products);
-        } catch(error){
+        } catch(error){            
             return [];
         }
+    }
+
+    async getById(id) {
+        const products = await this.getAll();
+        const productById = products.find(p => p.id == id);
+        return productById;
     }
 }
 
